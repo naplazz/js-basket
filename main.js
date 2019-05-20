@@ -46,17 +46,33 @@ $(document).ready(function() {
 
     for (var h = 0; h < giocatore.length; h++) {
       if ($(this).val() == giocatore[h]) {
-        $('#playertab').append(
-          '<tr>' +
-          '<td>' + giocatore[h] + '</td>' +
-          '<td>' + falli[h] + '</td>' +
-          '<td>' + rimbalzi[h] + '</td>' +
-          '<td>' + punti[h] + '</td>' +
-          '<td>' + successRate2[h] + '</td>' +
-          '<td>' + successRate3[h] + '</td>' +
-          '</tr>'
+        var source   = document.getElementById("entry-template").innerHTML;
+        var template = Handlebars.compile(source);
+        var context = {
+          giocatore: giocatore[h],
+          falli: falli[h],
+          rimbalzi: rimbalzi[h],
+          punti: punti[h],
+          successRate2: successRate2[h],
+          successRate3: successRate3[h]
+        };
+        var html = template(context);
+        $('#playertab').empty();
+    
+        $('#playertab').append(html);
 
-        )
+
+        // $('#playertab').append(
+        //   '<tr>' +
+        //   '<td>' + giocatore[h] + '</td>' +
+        //   '<td>' + falli[h] + '</td>' +
+        //   '<td>' + rimbalzi[h] + '</td>' +
+        //   '<td>' + punti[h] + '</td>' +
+        //   '<td>' + successRate2[h] + '</td>' +
+        //   '<td>' + successRate3[h] + '</td>' +
+        //   '</tr>'
+        //
+        // )
         /* Act on the event */
       }
     }
